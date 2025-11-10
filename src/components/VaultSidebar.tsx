@@ -28,6 +28,7 @@ interface VaultSidebarProps {
   onGeneratorClick?: () => void;
   onBreachCheckerClick?: () => void;
   isPhotoVault?: boolean;
+  isDocumentVault?: boolean;
 }
 
 const credentialCategoryIcons: Record<string, React.ReactNode> = {
@@ -53,8 +54,21 @@ const photoCategoryIcons: Record<string, React.ReactNode> = {
   'Documents': <FileText className="h-4 w-4" />,
 };
 
+const documentCategoryIcons: Record<string, React.ReactNode> = {
+  'All': <Grid className="h-4 w-4" />,
+  'Favorites': <Star className="h-4 w-4" />,
+  'Personal': <User className="h-4 w-4" />,
+  'Work': <Briefcase className="h-4 w-4" />,
+  'Financial': <Wallet className="h-4 w-4" />,
+  'Legal': <Shield className="h-4 w-4" />,
+  'Medical': <FileText className="h-4 w-4" />,
+  'Education': <FileText className="h-4 w-4" />,
+  'Other': <FileText className="h-4 w-4" />,
+};
+
 const credentialCategories = ['All', 'Favorites', 'Social', 'Work', 'Finance', 'Email', 'Gaming', 'Shopping', 'Personal'];
 const photoCategories = ['All', 'Favorites', 'Personal', 'Family', 'Work', 'Travel', 'Events', 'Documents'];
+const documentCategories = ['All', 'Favorites', 'Personal', 'Work', 'Financial', 'Legal', 'Medical', 'Education', 'Other'];
 
 export function VaultSidebar({ 
   selectedCategory, 
@@ -62,18 +76,21 @@ export function VaultSidebar({
   categoryCounts,
   onGeneratorClick,
   onBreachCheckerClick,
-  isPhotoVault = false
+  isPhotoVault = false,
+  isDocumentVault = false
 }: VaultSidebarProps) {
   const navigate = useNavigate();
-  const categories = isPhotoVault ? photoCategories : credentialCategories;
-  const categoryIcons = isPhotoVault ? photoCategoryIcons : credentialCategoryIcons;
+  const categories = isDocumentVault ? documentCategories : isPhotoVault ? photoCategories : credentialCategories;
+  const categoryIcons = isDocumentVault ? documentCategoryIcons : isPhotoVault ? photoCategoryIcons : credentialCategoryIcons;
 
   return (
     <div className="h-full flex flex-col bg-sidebar border-r border-sidebar-border">
       <div className="p-4 border-b border-sidebar-border">
         <div className="flex items-center gap-3 mb-2">
           <div className="h-10 w-10 rounded-lg bg-primary flex items-center justify-center">
-            {isPhotoVault ? (
+            {isDocumentVault ? (
+              <FileText className="h-5 w-5 text-primary-foreground" />
+            ) : isPhotoVault ? (
               <ImageIcon className="h-5 w-5 text-primary-foreground" />
             ) : (
               <Lock className="h-5 w-5 text-primary-foreground" />
@@ -81,10 +98,10 @@ export function VaultSidebar({
           </div>
           <div>
             <h1 className="font-bold text-lg text-sidebar-foreground">
-              {isPhotoVault ? 'Photo Vault' : 'Secure Vault'}
+              {isDocumentVault ? 'Document Vault' : isPhotoVault ? 'Photo Vault' : 'Secure Vault'}
             </h1>
             <p className="text-xs text-sidebar-foreground/60">
-              {categoryCounts.All || 0} {isPhotoVault ? 'photo' : 'credential'}{(categoryCounts.All || 0) !== 1 ? 's' : ''}
+              {categoryCounts.All || 0} {isDocumentVault ? 'document' : isPhotoVault ? 'photo' : 'credential'}{(categoryCounts.All || 0) !== 1 ? 's' : ''}
             </p>
           </div>
         </div>
@@ -120,15 +137,44 @@ export function VaultSidebar({
             <p className="text-xs font-semibold text-sidebar-foreground/60 uppercase tracking-wide px-3 mb-2">
               Navigation
             </p>
-            {isPhotoVault ? (
-              <Button
-                variant="ghost"
-                className="w-full justify-start gap-3 text-sidebar-foreground hover:bg-sidebar-accent/50"
-                onClick={() => navigate('/vault')}
-              >
-                <Lock className="h-4 w-4" />
-                <span>Password Vault</span>
-              </Button>
+            {isDocumentVault ? (
+              <>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-3 text-sidebar-foreground hover:bg-sidebar-accent/50"
+                  onClick={() => navigate('/vault')}
+                >
+                  <Lock className="h-4 w-4" />
+                  <span>Password Vault</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-3 text-sidebar-foreground hover:bg-sidebar-accent/50"
+                  onClick={() => navigate('/photos')}
+                >
+                  <ImageIcon className="h-4 w-4" />
+                  <span>Photo Vault</span>
+                </Button>
+              </>
+            ) : isPhotoVault ? (
+              <>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-3 text-sidebar-foreground hover:bg-sidebar-accent/50"
+                  onClick={() => navigate('/vault')}
+                >
+                  <Lock className="h-4 w-4" />
+                  <span>Password Vault</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-3 text-sidebar-foreground hover:bg-sidebar-accent/50"
+                  onClick={() => navigate('/documents')}
+                >
+                  <FileText className="h-4 w-4" />
+                  <span>Document Vault</span>
+                </Button>
+              </>
             ) : (
               <>
                 <Button
@@ -138,6 +184,14 @@ export function VaultSidebar({
                 >
                   <ImageIcon className="h-4 w-4" />
                   <span>Photo Vault</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-3 text-sidebar-foreground hover:bg-sidebar-accent/50"
+                  onClick={() => navigate('/documents')}
+                >
+                  <FileText className="h-4 w-4" />
+                  <span>Document Vault</span>
                 </Button>
                 <Button
                   variant="ghost"

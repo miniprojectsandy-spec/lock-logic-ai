@@ -8,6 +8,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Auth from "./pages/Auth";
 import Vault from "./pages/Vault";
 import PhotoVault from "./pages/PhotoVault";
+import DocumentVault from "./pages/DocumentVault";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
@@ -26,6 +27,7 @@ const App = () => (
               <Route path="/auth" element={<Auth />} />
               <Route path="/vault" element={<Vault />} />
               <Route path="/photos" element={<PhotoVault />} />
+              <Route path="/documents" element={<DocumentVault />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

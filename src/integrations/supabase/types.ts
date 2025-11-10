@@ -56,6 +56,48 @@ export type Database = {
         }
         Relationships: []
       }
+      documents: {
+        Row: {
+          category: string
+          created_at: string
+          file_path: string
+          file_size: number
+          id: string
+          is_favorite: boolean
+          mime_type: string
+          notes: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          file_path: string
+          file_size: number
+          id?: string
+          is_favorite?: boolean
+          mime_type: string
+          notes?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          file_path?: string
+          file_size?: number
+          id?: string
+          is_favorite?: boolean
+          mime_type?: string
+          notes?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       photos: {
         Row: {
           category: string
