@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, User, Mail, Lock, Save, AlertTriangle } from 'lucide-react';
 import { toast } from 'sonner';
 import { PasswordStrengthMeter } from '@/components/PasswordStrengthMeter';
+import { LoginHistory } from '@/components/LoginHistory';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -231,6 +232,9 @@ export default function Profile() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Login History */}
+        <LoginHistory />
 
         {/* Account Actions */}
         <Card>

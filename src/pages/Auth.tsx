@@ -39,6 +39,13 @@ export default function Auth() {
       if (error) throw error;
 
       if (data.session) {
+        // Record successful login
+        await supabase.from('login_history').insert({
+          user_id: data.user.id,
+          user_agent: navigator.userAgent,
+          status: 'success',
+        });
+        
         setMasterPassword(loginPassword);
         toast.success('Welcome back!');
         navigate('/vault');
