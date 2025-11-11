@@ -11,6 +11,7 @@ import { ArrowLeft, User, Mail, Lock, Save, AlertTriangle } from 'lucide-react';
 import { toast } from 'sonner';
 import { PasswordStrengthMeter } from '@/components/PasswordStrengthMeter';
 import { LoginHistory } from '@/components/LoginHistory';
+import { TodoList } from '@/components/TodoList';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -235,6 +236,9 @@ export default function Profile() {
 
         {/* Login History */}
         <LoginHistory />
+
+        {/* To-Do List */}
+        <TodoList />
 
         {/* Account Actions */}
         <Card>
