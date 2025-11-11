@@ -10,6 +10,8 @@ import Vault from "./pages/Vault";
 import PhotoVault from "./pages/PhotoVault";
 import DocumentVault from "./pages/DocumentVault";
 import Profile from "./pages/Profile";
+import Articles from "./pages/Articles";
+import ArticleDetail from "./pages/ArticleDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +30,8 @@ const App = () => (
               <Route path="/vault" element={<Vault />} />
               <Route path="/photos" element={<PhotoVault />} />
               <Route path="/documents" element={<DocumentVault />} />
+              <Route path="/articles" element={<Articles />} />
+              <Route path="/articles/:slug" element={<ArticleDetail />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

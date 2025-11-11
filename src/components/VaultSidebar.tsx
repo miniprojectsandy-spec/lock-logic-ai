@@ -18,7 +18,8 @@ import {
   Users,
   Plane,
   Calendar,
-  FileText
+  FileText,
+  BookOpen
 } from 'lucide-react';
 
 interface VaultSidebarProps {
@@ -192,6 +193,14 @@ export function VaultSidebar({
                 >
                   <FileText className="h-4 w-4" />
                   <span>Document Vault</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-3 text-sidebar-foreground hover:bg-sidebar-accent/50"
+                  onClick={() => navigate('/articles')}
+                >
+                  <BookOpen className="h-4 w-4" />
+                  <span>Security Articles</span>
                 </Button>
                 <Button
                   variant="ghost"
